@@ -1,0 +1,32 @@
+ LOG FILE INIT
+
+ *** ERROR     9 IN MLOPEN
+ *** PC/WINDOWS NT Open file error for \TCTEST98.LOG
+ Thermo-Calc can not find the file
+ TCPATH\DATA\TC_INITd                                                           
+                                                                                
+                                                                                
+                    
+ Try to correct the SET TCPATH= statement
+
+ *** ERROR  1001 IN TDBSET
+ *** TCPATH\DATA\TC_INITd not found
+
+ *** ERROR  1011 IN TQDEFE
+ *** No such elementC !
+
+ *** ERROR  1011 IN TQDEFE
+ *** No such elementSi !
+
+ *** ERROR  1011 IN TQDEFE
+ *** No such elementFe !
+ Illegal keyword in file 
+ TCPATH\DATA\TCFE7\TCFE7setup.TDC                                               
+                                                                                
+                                                                                
+                    
+ Keyword = 
+ 	Ş™R3z>³öf¥                                                                  
+  
+ Error is around line number                      1
+  IN SGTBEG/TDB

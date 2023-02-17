@@ -1,0 +1,111 @@
+void calculate_interface_normal(C_cell *cell)
+{
+	if (cell->cell_state == C_cell::list_of_states::FCC)
+	{
+		(cell)->interface_numerator = 1;
+		(cell)->interface_denominator = 1;
+
+		for (int k = 0; k < 4; k++)
+		{
+			cell->pointer_solid_fraction_on_edge[k] = &C_cell::liq_fcc_solid_fraction_on_edge[1];
+		}
+	}
+	else if (cell->cell_state == C_cell::list_of_states::LIQUID)
+	{
+		(cell)->interface_numerator = 1;
+		(cell)->interface_denominator = 1;
+
+		for (int k = 0; k < 4; k++)
+		{
+			cell->pointer_solid_fraction_on_edge[k] = &C_cell::liq_fcc_solid_fraction_on_edge[0];
+		}			
+	}
+	else	// INTERFACE
+	{
+		(cell)->interface_numerator = ( (cell + no_of_cells_x_total)->phase_fraction
+					+ ((cell + no_of_cells_x_total - 1)->phase_fraction + (cell + no_of_cells_x_total + 1)->phase_fraction) * one_over_sqrt2
+					+ (cell + 2 * no_of_cells_x_total)->phase_fraction * 0.5)
+					- ( (cell - no_of_cells_x_total)->phase_fraction
+					+ ((cell - no_of_cells_x_total - 1)->phase_fraction + (cell - no_of_cells_x_total + 1)->phase_fraction) * one_over_sqrt2
+					+ (cell - 2 * no_of_cells_x_total)->phase_fraction * 0.5);
+
+		if ((cell)->interface_numerator == 0) (cell)->interface_numerator = 1E-10;
+
+		(cell)->interface_denominator = ( (cell + 1)->phase_fraction
+					+ ((cell + 1 + no_of_cells_x_total)->phase_fraction + (cell  + 1 - no_of_cells_x_total)->phase_fraction) * one_over_sqrt2
+					+ (cell + 2)->phase_fraction * 0.5)
+					- ( (cell - 1)->phase_fraction
+					+ ((cell - 1 + no_of_cells_x_total)->phase_fraction + (cell - 1 - no_of_cells_x_total)->phase_fraction) * one_over_sqrt2
+					+ (cell - 2)->phase_fraction * 0.5);
+
+		if ((cell)->interface_denominator == 0) (cell)->interface_denominator = 1E-10;
+
+		cell->interface_normal = atan(cell->interface_numerator / cell->interface_denominator) * 180 / 3.14159;
+		cell->interface_normal = round(cell->interface_normal / 5) * 5;
+
+		//--------------------------------------------------------------------
+
+		if (cell->interface_normal < 0)
+		{
+			cell->interface_normal = - cell->interface_normal;
+		}
+
+		//-----------------------------
+
+		if (cell->interface_normal == 0)
+		{
+			if (cell->interface_denominator > 0)						//	 _______
+			{															//	|	  |	|
+				cell->origin_corner = C_cell::list_of_corners::SE;		//	|	  |	|
+				cell->interface_normal = 90;							//	|_____|_|o
+			}
+			else	// denominator < 0										o_______
+			{															//	| |		|
+				cell->origin_corner = C_cell::list_of_corners::NW;		//	| |		|
+				cell->interface_normal = 90;							//	|_|_____|
+			}
+		}
+		else if (cell->interface_normal == 90)
+		{
+			if (cell->interface_numerator > 0)							//	 _______o
+			{															//	|_______|
+				cell->origin_corner = C_cell::list_of_corners::NE;		//	|	  	|
+				cell->interface_normal = 90;							//	|_______|
+			}
+			else	// numeratorr < 0										 _______
+			{															//	| 		|
+				cell->origin_corner = C_cell::list_of_corners::SW;		//	|_______|
+				cell->interface_normal = 90;							// o|_______|
+			}
+		}
+		else // <> 0 oraz <> 90 czyli <5;85>
+		{
+			if ((cell)->interface_numerator > 0)
+			{
+				if ((cell)->interface_denominator > 0)
+				{
+					// + / +
+					cell->origin_corner = C_cell::list_of_corners::NE;
+				}
+				else
+				{
+					// + / -
+					cell->origin_corner = C_cell::list_of_corners::NW;
+				}
+			}
+			else if ((cell)->interface_denominator > 0)
+				{
+					// - / +
+					cell->origin_corner = C_cell::list_of_corners::SE;
+				}
+				else
+				{
+					// - / -
+					cell->origin_corner = C_cell::list_of_corners::SW;
+				}
+		}
+
+		cell->set_NEWS_int_lenght_pointer();
+	}
+}
+//*********************************

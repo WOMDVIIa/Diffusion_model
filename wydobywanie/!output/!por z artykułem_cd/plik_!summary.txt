@@ -1,0 +1,12 @@
+21429	 [sec]	= calculations duration
+-1.3e+09 [#]	= stepps * X * Y
+
+100000	 [#]	= calculations stepps
+5	 [#]	= file stepps
+60	 [#]	= screen stepps
+3.0e+07 [#]	= total stepps
+
+100	 [#]	= number of X axis cells
+1	 [#]	= number of Y axis cells
+
+0	 [#]	= mass miscalculations

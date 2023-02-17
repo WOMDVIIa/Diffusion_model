@@ -1,0 +1,132 @@
+	//{
+	//	C_TQ_chem_pot liquid("LIQ", "C", "Si");
+	//
+	//	wsk = liquid.get_chemical_potentials(1473.15, 3.2, 1.0);
+	//	for(int i = 0; i < no_elements; i++)
+	//	{
+	//		cout << wsk[i] << "\n";
+	//	}
+	//}
+	//{
+	//	C_TQ_chem_pot fcc("FCC", "C", "Si");
+	//	cout << "\n\n";
+	//
+	//	wsk = fcc.get_chemical_potentials(1473.15, 3.2, 1.0);
+	//	for(int i = 0; i < no_elements; i++)
+	//	{
+	//		cout << wsk[i] << "\n";
+	//	}
+	//}
+	//{
+	//	C_TQ_Fe syst("C");
+	//	syst.enter_conditions_ele_wtpc(3.5);
+	//	syst.enter_condition_temperature(1250);
+	//	syst.compute_equilibrium();
+	//	syst.print_equilibrium();
+	//}
+	//
+	//{
+	//	double *eq_pointer;
+	//	
+	//	C_TQ_chem_pot_two_ph equil("C", "Si");
+	//	eq_pointer = equil.get_chemical_potentials(temperature_current, concentration_C, concentration_Si);
+	//		for(int i = 0; i < no_elements; i++)
+	//		{
+	//			cout << eq_pointer[i] << "\n";
+	//		}
+	//}
+	//
+	//
+	//{
+	//	C_TQ_liquidus syst_a("C", "Si");	// creating system of given components plus Fe
+	//
+	//	double temperature;
+	//		temperature = syst_a.get_liquidus(4.26, 1);	// calculation and return of liquidus temperature for given wt. % of previously declared elements
+	//		cout << temperature << endl;
+	//
+	//	C_TQ_liquidus syst_b("C", "S");	// creating system of given components plus Fe
+	//
+	//		temperature = syst_b.get_liquidus(4.26, 0.05);	// calculation and return of liquidus temperature for given wt. % of previously declared elements
+	//		cout << temperature << endl;
+	//
+	//	C_TQ_liquidus syst_c("C");	// creating system of given components plus Fe
+	//
+	//		temperature = syst_c.get_liquidus(4.26);	// calculation and return of liquidus temperature for given wt. % of previously declared elements
+	//		cout << temperature << endl;
+	//	
+	//	C_TQ_liquidus syst_d("C");	// creating system of given components plus Fe
+	//
+	//		temperature = syst_d.get_liquidus(4.36);	// calculation and return of liquidus temperature for given wt. % of previously declared elements
+	//		cout << temperature << endl;
+	//}
+	//{
+	//	C_TQ_single_property volume("V", "FCC", "C", "Si");
+	//	double val = volume.get_value(1500.0, 3.2, 1.0);
+	//	cout << "val = " << val << endl;
+	//}
+	//
+	//int numer = 5;
+	//
+	//cout << endl << "---------------\n\n" << numer << numer + 2;
+	//
+	//syst.enter_conditions_ele_wtpc(3.2, 1.0, 0.7 /*, 0.05, 0.5, 0.5, 1.0, 0.06*/);	
+	//syst.remove_condition_temperature();
+	//syst.compute_equilibrium();
+	//syst.print_equilibrium();
+	//syst.print_chemical_potential();  /*to jest jeszcze do przeniesienia do innej klasy*/
+	//
+	//int licznik = 0;
+	//time_t seconds = time(NULL);
+	//
+	//for(double wtpc_c = 3.0; wtpc_c < 5.00; wtpc_c += 0.05)
+	//{
+	//	for(double wtpc_si = 1.00; wtpc_si < 2.00; wtpc_si += 0.01)
+	//	{
+	//		syst.enter_conditions_ele_wtpc(wtpc_c, wtpc_si/*, 0.05, 1.0, 0.5, 0.5, 1.0, 0.06*/);
+	//		syst.compute_equilibrium();
+	//		cout << "for C = " << wtpc_c << "\t" "Si = " << wtpc_si
+	//			 << "   \t" "T liq = " <<  syst.get_liquidus() - 273.15 << endl;
+	//		licznik++;
+	//	}
+	//}
+	//cout << licznik << " equilibriums calculated ";
+	//
+	//seconds = -(seconds - time(NULL) );
+	//cout << "in " << seconds << " seconds" << endl;
+	//
+	//{
+	//	C_TQ_Fe syst("C");
+	//	
+	//	double temp = syst.get_value(1500, 1); // 1 - LIQ, 2 - FCC
+	//	cout << temp << " LIQ" << endl;
+	//
+	//	temp = syst.get_value(1500, 2); // 1 - LIQ, 2 - FCC
+	//	cout << temp << " FCC" << endl;
+	//
+	//	temp = syst.get_value(1300, 1); // 1 - LIQ, 2 - FCC
+	//	cout << temp << " LIQ" << endl;
+	//
+	//	temp = syst.get_value(1300, 2); // 1 - LIQ, 2 - FCC
+	//	cout << temp << " FCC" << endl;
+	//}
+	//
+	//{
+	//	C_TQ_Fe_fcc_gra syst("C");
+	//	
+	//	double temp = syst.get_value(1500, 1); // 1 - FCC
+	//	cout << temp << " FCC" << endl;
+	//
+	//	temp = syst.get_value(1500, 2);
+	//	cout << temp << " GRA" << endl;
+	//
+	//	temp = syst.get_value(1300, 1);
+	//	cout << temp << " FCC" << endl;
+	//
+	//	temp = syst.get_value(1300, 2);
+	//	cout << temp << " GRA" << endl;
+	//}
+	//
+	//{
+	//	C_TQ_single_property masa("V", "GRA", "C");
+	//	cout << masa.get_value(1300, 100) << endl;
+	//}

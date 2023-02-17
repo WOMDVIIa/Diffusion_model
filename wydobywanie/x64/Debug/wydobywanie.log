@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\rz_m\Nextcloud\wydobywanie\main.cpp(1624,9): warning C4129: "S": nierozpoznany znak sekwencji ucieczki
+  wydobywanie.vcxproj -> C:\Users\rz_m\Nextcloud\wydobywanie\x64\Debug\wydobywanie.exe

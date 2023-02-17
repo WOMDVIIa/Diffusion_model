@@ -1,0 +1,711 @@
+	09-04-2019
+	Sprawdzenia poszczególych klas, jak dzia³aj¹, co robi¹ - sprawdzane by³o po powrocie do programu po d³ugiej przerwie
+
+BLOK 1
+
+//08 - 04 - 2019 pocz¹tek zakomentowania, tu testowane by³o(po d³ugiej przerwie) jak dzia³aj¹ klasy
+//	C_TQ_Fe klasa("C", "Si");
+//	klasa.enter_condition_temperature(1000);
+//	klasa.enter_conditions_ele_mass(1, 2, 3);
+//	klasa.compute_equilibrium();
+//	klasa.print_equilibrium();
+//
+//	C_TQ_single_phase a("LIQ", "Si", "C");
+//	a.enter_condition_temperature(1000);
+//	a.enter_conditions_ele_mass(0.01, 0.01, 0.98);
+//	a.compute_equilibrium();
+//	a.print_equilibrium();
+//
+//	double* wsk;
+//
+//	C_TQ_chem_pot b("LIQ", "Si", "C");
+//	b.enter_condition_temperature(1000);
+//	b.enter_conditions_ele_mass(0.01, 0.01, 0.98);
+//	b.compute_equilibrium();
+//	b.print_equilibrium();
+//
+//	wsk = b.get_chemical_potentials(1100, 0.01, 0.01, 0.98);
+//
+//	b.print_equilibrium();
+//
+//	for (int i = 0; i < 3; i++)
+//	{
+//		cout << "wsk[" << i << "] = " << wsk[i] << endl;
+//	}
+//08-04-2019 koniec zakomentowania
+
+KONIEC BLOKU 1
+
+BLOK 2
+
+		//C_TQ_chem_pot system_FCC("FCC", "C", "Si");
+
+		//chemical_potential_pointer = system_FCC.get_chemical_potentials(temperature, 1.5, 1.0, 100.0);
+
+		//cout << "\nchem pots:\n";
+		//for (int i = 0; i < 3; i++)
+		//{
+		//	cout << chemical_potential_pointer[i] << "\n";
+		//}
+		//cout << endl << C_TQ_Fe::separator << endl;
+
+		////*********************************
+
+		//C_TQ_chem_pot system_LIQ("LIQ", "C", "Si");
+
+		//chemical_potential_pointer = system_LIQ.get_chemical_potentials(temperature, 1.5, 1.0, 100.0);
+
+		//cout << "\nchem pots:\n";
+		//for (int i = 0; i < 3; i++)
+		//{
+		//	cout << chemical_potential_pointer[i] << "\n";
+		//}
+		//cout << endl << C_TQ_Fe::separator << endl;
+
+		////*********************************
+
+		//C_TQ_chem_pot_two_ph system_FCC_LIQ("C", "Si");
+
+		//chemical_potential_pointer = system_FCC_LIQ.get_chemical_potentials(temperature, 1.5, 1.0, 100.0);
+
+		//cout << "\nchem pots:\n";
+		//for (int i = 0; i < 3; i++)
+		//{
+		//	cout << chemical_potential_pointer[i] << "\n";
+		//}
+		//cout << endl << C_TQ_Fe::separator << endl;
+
+		////*********************************
+
+		//C_TQ_single_property test("N", "LIQ", "C", "Si");
+		//double temp;
+		//temp = test.get_value(temperature, 1.5, 1.0, 100.0);
+		//cout << "value = " << temp << endl << endl;
+
+KONIEC BLOKU 2
+
+// 11-04-2019	pocz¹tek zakomentowania - dzia³aj¹cy blok sprawdzaj¹cy klasê C_cell, po kolei dane wysy³ane do C_TQ_Fe, C_TQ_single_phase, C_TQ_chem_pot ta ostatnia to docelowy cel dla tych danych, tam bêd¹ wykonywane obliczenia
+		//char *state = "LIQ";
+
+		//C_cell test2(&initial_ele_al1_conc, &initial_ele_al2_conc, state, &temperature);
+		//test2.present_yourself();
+
+		//C_TQ_Fe a(element_alloy1, element_alloy2);
+		//a.enter_condition_temperature(test2.temperature);
+		//a.enter_conditions_ele_mass(test2.mass_ele_al1, test2.mass_ele_al2, test2.mass_ele_base);
+		//a.compute_equilibrium();
+		//a.print_equilibrium();
+
+		//C_cell test;
+		//test.set_initial_conditions(&initial_ele_al1_conc, &initial_ele_al2_conc, state, &temperature);
+		//test.present_yourself();
+
+		//C_TQ_single_phase b(state, element_alloy1, element_alloy2);
+		//b.enter_condition_temperature(test.temperature);
+		//b.enter_conditions_ele_mass(test.mass_ele_al1, test.mass_ele_al2, test.mass_ele_base);
+		//b.compute_equilibrium();
+		//b.print_equilibrium();
+
+		//C_TQ_chem_pot qq(state, element_alloy1, element_alloy2);
+		//chemical_potential_pointer = qq.get_chemical_potentials(test.temperature, test.mass_ele_al1, test.mass_ele_al2, test.mass_ele_base);
+
+		//for (int i = 0; i < no_of_elements; i++)
+		//{
+		//	cout << endl << "ele_al" << i << " = " << chemical_potential_pointer[i];
+		//}
+// 11-04-2019	koniec zakomentowania
+
+
+// 11-04-2019	ca³kowita masa wêgla w uk³¹dzie, ale po co?
+// 16-04-2019	chyba po to ¿eby sprawdziæ czy "defragmentacja" zmienia t¹ wartoœæ
+		
+		//C_cell cell[no_of_cells];
+		//double mc = 0.0;
+
+		//for (int i = 0; i < no_of_cells; i++)
+		//{
+		//	mc += cell[i].mass_ele_al1;
+		//	cout << "mass_ele_al1[" << i << "] = " << cell[i].mass_ele_al1 << endl;
+		//}
+		//cout << endl << "mass_ele_al1 = " << mc << endl << endl;
+// 11-04-2019	koniec zakomentowania
+
+// 11-04-2019	wypisanie do pliku tablicy stê¿eñ C, Si, Fe dla wszystkich komórek - ta sekcja nie by³a uruchamiana, nie wiem czy dzia³a
+	//	txt_filename = "conc_field_";
+	//	txt_filename += to_string(timestep_output);
+	//	txt_filename += ".txt";
+
+	//	conc_field_txt.open(txt_filename, ios::out);
+	//	conc_field_txt << "timestep\t" << timestep_output << "\n";
+	//	conc_field_txt << "i\t" << "conc_C\t" << "conc_Si\t" << "conc_Fe\n";
+
+	//	for (int i = 0; i < no_of_cells; i++)
+	//	{
+	//		mass_of_cell = cell[i].mass_C + cell[i].mass_Si + cell[i].mass_Fe;
+
+	//		conc_field_txt << i << "\t";
+	//		conc_field_txt << cell[i].mass_C  / mass_of_cell << "\t";
+	//		conc_field_txt << cell[i].mass_Si / mass_of_cell << "\t";
+	//		conc_field_txt << cell[i].mass_Fe / mass_of_cell << "\n";
+	//	}
+	//	conc_field_txt.close();
+// 11-04-2019	koniec zakomentowania
+
+// 26-04-2019	wypisanie pierwiastków w uk³adzie, wypisanie stê¿eñ wyjœciowych (sprawdzenie poprawnoœci funkcji initial_concentration(); ), sprawdzenie czy wskaŸnik z potencja³ami jest ustawiony dobrze po obliczeniach, dochodzenie do 
+		utworzenia ccell poprzez wskaŸnik do tablicy (a nie adresy poszczególnych pól)
+	//for (int i = 0; i < no_of_elements; i++)
+	//{
+	//	cout << "ele[" << i << "] = " << element[i] << endl;
+	//}
+
+	//cout << endl << "[0][0] = " << tab_initial_concentration[0][0] << endl;
+	//cout << "[49][0] = " << tab_initial_concentration[49][0] << endl;
+	//cout << "[0][1] = " << tab_initial_concentration[0][1] << endl;
+	//cout << "[49][1] = " << tab_initial_concentration[49][1] << endl;
+
+	//C_TQ_chem_pot sys("FCC", "C", "Si");
+	//chemical_potential_pointer = sys.get_chemical_potentials(temperature, 0.1, 0.05, 10);
+
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	cout << "wsk[" << i << "] = " << chemical_potential_pointer[i] << endl;
+	//}
+
+	//double tab[2] = {1.5, 0.5};
+
+	//C_cell kom(&tab_initial_concentration[0][0], &tab_initial_concentration[0][1], "FCC", &temperature);
+	//kom.present_yourself();
+	//C_cell kom2(tab, "FCC", &temperature);
+	//kom2.present_yourself();
+
+
+// 20-10-2019	utworzenie pojednczego obiektu C_cell (ju¿ nie przydatne, testowane na pocz¹tku, teraz praca z tablic¹ obiektów C_cell)
+	//pojedynczy obiekt, inny konstruktor ni¿ w przypadku tablicy
+	//C_cell test_cell(&tab_initial_concentration[tested_cell_y][tested_cell_x][0][0], &tab_initial_state[tested_cell_y][tested_cell_x], &tab_temperature[tested_cell_y][tested_cell_x]);
+	//test_cell.present_yourself();
+	//test_calc(&test_cell);
+
+
+// 18-11-2019	sprawdzenie czy 4 wskaŸniki ujête w tabliê w C_cell mog¹ pokazywaæ na elementy wielowymiarowej tablicy double (czy jest sens robiæ statyczn¹ tablicê NEWS)
+	//double tab_test[5][5][5];
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	tab_test[3][3][i] = i * 0.2;
+	//}
+
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	cout << "test = " << tab_test[3][3][i] << endl;
+	//}
+
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	Ctab[cell_loop_y_start][cell_loop_x_start].pointer_solid_fraction_on_edge[i] = &tab_test[3][3][i];
+	//}
+
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	cout << "test = " << *Ctab[cell_loop_y_start][cell_loop_x_start].pointer_solid_fraction_on_edge[i] << endl;
+	//}
+
+ ////18-11-2019	sprawdzenie poprawnosci obliczeñ normalnej do frontu oraz naroznika poczatkowego na interfejsie
+	//for (int j = cell_loop_y_start; j < cell_loop_y_stop; j++)
+	//{
+	//	for (int i = cell_loop_x_start; i < cell_loop_x_stop; i++)
+	//	{
+	//		if (Ctab[j][i].cell_state == C_cell::list_of_states::INTERFACE)
+	//		{
+	//			cout << "y = " << j << ", x = " << i << "\nnum = " << pointer_Ctab[j][i]->interface_numerator << endl << "denomi = " << pointer_Ctab[j][i]->interface_denominator << "\nnormal = " << pointer_Ctab[j][i]->interface_normal << endl;
+	//			cout << "origin = " << pointer_Ctab[j][i]->origin_corner << "\n\n";
+	//			// nizej wypisanie do zestawienia z danymi wejsciowymi fraction solid - graficzne sprawdzenie czy wszystko dziala poprawnie (patrz 2. wpis 27-11-2019)
+	//			 cout << Ctab[j][i].origin_corner << "_" << Ctab[j][i].interface_normal << "\t";
+	//		}
+	//	}
+	//}
+
+// 27-11-2019 sprawdzenie poprawnosci obliczania masy: ca³ej komórki (równie¿ interfejs), poszczególnych pierwiastków w poszczególnych fazach - masa komórki powinna byæ sta³a, niezale¿nie od %FCC wejœciowego oraz stê¿eñ
+// 14-01-2020 zmiana pêtli - wprowadzenie *C_cell
+//	for (int j = 0; j < no_of_cells_y; j++)
+//	{
+//		for (int i = 0; i < no_of_cells_x; i++)
+//		{
+//			double tempyy = 0.0;
+//			for (int k = 0; k < 2; k++)
+//			{
+//				double tempxx = 0.0;
+//				for (int m = 0; m < 3; m++)
+//				{
+//					tempxx += Ctab[j][i].element_mass[k][m];
+//					cout << "i = " << i << ", j = " << j << ", phase = " << k << ", element = " << m << ", mass = " << Ctab[j][i].element_mass[k][m] << endl;
+//				}
+//				cout << "calosc = " << tempxx << "\n";
+//				tempyy += tempxx;
+//			}
+//			cout << "calosc 2 fazy = " << tempyy << "\n\n";
+//		}
+//	}
+
+// 27-11-2019 sprawdzenie poprawnoœci wczytania danych fraction solid z pliku i przepisania tych danych do obiektów klasy C_cell
+	//cout << "\n\npo war brze phase fraction (z brzegami):\n";
+	//for (int j = 0; j < no_of_cells_y_total; j++)
+	//{
+	//	for (int i = 0; i < no_of_cells_x_total; i++)
+	//	{
+	//		cout << Ctab[j][i].phase_fraction << "\t";
+	//	}
+	//	cout << "\n";
+	//}
+
+// 05-12-2019 obliczenie potencja³ów chemicznych dla pojedynczej komórki i wypisanie wyników na ekran
+	//C_cell *test = &Ctab[cell_loop_y_start][cell_loop_x_start];
+	//calculate_chemical_potentials(test);
+
+
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	for (int j = 0; j < 3; j++)
+	//	{
+	//		cout << "chem pot[" << i << "][" << j << "] = " << test->element_chemical_potential[i][j] << endl;
+	//	}
+	//}
+
+// 06-12-2019 nieu¿ywana czêœæ wype³niania tablicy initial_state - po zmianach wczytywanie z pliku txt
+	//switch ( (i + 2 * j) % 5 )
+	////switch (i)
+	//{
+	//case 0:
+	//	tab_initial_state[j][i] = C_cell::list_of_states::LIQUID;
+	//	break;
+
+	//case 1:
+	//	tab_initial_state[j][i] = C_cell::list_of_states::INTERFACE;
+	//	break;
+
+	////case 2:
+	////	tab_initial_state[j][i] = C_cell::list_of_states::LIQUID;
+	////	break;
+
+	////case 3:
+	////	tab_initial_state[j][i] = C_cell::list_of_states::INTERFACE;
+	////	break;
+
+	//default:
+	//	tab_initial_state[j][i] = C_cell::list_of_states::FCC;
+	//	//tab_initial_state[j][i] = C_cell::list_of_states::FCC;
+	//}
+
+// 13-01-2020 sprawdzenie czy tablice C_cell *C_cell dobrze dzia³aj¹, czy wskaŸniki s¹ dobrze ustawione
+	//for (int j = 0; j < no_of_cells_y; j++)
+	//{
+	//	for (int i = 0; i < no_of_cells_x; i++)
+	//	{
+	//		cout << Ctab[j][i].phase_fraction << "\t";
+	//	}
+	//	cout << endl;
+	//}
+
+	//cout << endl;
+	//
+	//for (int j = 0; j < no_of_cells_y_total; j++)
+	//{
+	//	for (int i = 0; i < no_of_cells_x_total; i++)
+	//	{
+	//		cout << pointer_Ctab[j][i]->phase_fraction << "\t";
+	//	}
+	//	cout << endl;
+	//}
+
+// 15-01-2020 stare ustawianie warunków brzegowych, teraz robi to tablica wskaŸników *C_cell
+	//void set_phase_fraction_NS_border_conditions(C_cell *cell)
+	//{
+	//	for (int j = 0; j < cell_border_thickness; j++)
+	//	{
+	//		for (int i = 0; i < no_of_cells_x; i++)
+	//		{
+	//			// warunki periodyczne
+	//			//(cell - (no_of_cells_x_total * (j + 1)) + i)->phase_fraction = (cell + no_of_cells_x_total * (no_of_cells_y - (j + 1)) + i)->phase_fraction;
+	//			//(cell + no_of_cells_x_total * (no_of_cells_y + j) + i)->phase_fraction = (cell + no_of_cells_x_total * j + i)->phase_fraction;
+	//
+	//			// warunki lustrzane
+	//			(cell - (no_of_cells_x_total * (j + 1)) + i)->phase_fraction = (cell + i)->phase_fraction;
+	//			(cell + no_of_cells_x_total * (no_of_cells_y + j) + i)->phase_fraction = (cell + no_of_cells_x_total * (no_of_cells_y - 1) + i)->phase_fraction;
+	//		}
+	//	}
+	//}
+	////*********************************
+	//void set_phase_fraction_WE_border_conditions(C_cell *cell)
+	//{
+	//	for (int j = 0; j < cell_border_thickness; j++)
+	//	{
+	//		for (int i = 0; i < no_of_cells_y_total; i++)
+	//		{
+	//			// warunki lustrzane
+	//			(cell + i * no_of_cells_x_total + j)->phase_fraction = (cell + i * no_of_cells_x_total + cell_border_thickness)->phase_fraction;
+	//			(cell + (no_of_cells_x_total - 1) + i * no_of_cells_x_total - j)->phase_fraction = (cell + i * no_of_cells_x_total + no_of_cells_x + cell_border_thickness - 1)->phase_fraction;
+	//		}
+	//	}
+	//}
+	//*********************************
+
+// 15-01-2020 stara funkcja z warunkami brzegowymi (ju¿ nieu¿ywana) oraz pêtl¹ do wywo³ywania obliczeñ normalnej do interfejsu (teraz ta pêtla jest w funkcji do obliczeñ interfejsu)
+	//void border_conditions_and_interface_normal()
+	//{
+	//	//set_phase_fraction_NS_border_conditions(&Ctab[cell_loop_y_start][cell_loop_x_start]);
+	//	//set_phase_fraction_WE_border_conditions(&Ctab[0][0]);
+	//
+	//	C_cell *pointer = pointer_Ctab[0][0];
+	//
+	//	for (int j = cell_loop_y_start; j < cell_loop_y_stop; j++)
+	//	{
+	//		for (int i = cell_loop_x_start; i < cell_loop_x_stop; i++)
+	//		{
+	//			//calculate_interface_normal(&Ctab[j][i]);
+	//			//calculate_interface_normal(pointer_Ctab[j][i]);
+	//			calculate_interface_normal(pointer);
+	//			pointer++;
+	//		}
+	//	}
+	//}
+	//*********************************
+
+// 10-03-2020 obliczenia dla poszczególnych komórek a nie dla ca³oœci siatki, fragment potrzebny przy pozbywaniu siê b³êdów (weryfikacja) przy obliczeniach masy (m_LIQ = 3.9 podczas gdy dane wejœciowe by³y 3.6)
+	//Ctab[4][4].set_initial_conditions(&tab_initial_concentration[4][4][0][0], &tab_initial_state[4][4], &tab_initial_fraction_solid[4][4], &tab_temperature[4][4]);
+	//Ctab[4][4].calculate_phase_fraction_and_masses();
+	//Ctab[4][4].calculate_concentration_and_chemical_potential_coefficient();
+	//cout << "masa 4 4 = " << Ctab[4][4].mass[2] << endl;
+	//
+	//Ctab[5][5].set_initial_conditions(&tab_initial_concentration[5][5][0][0], &tab_initial_state[5][5], &tab_initial_fraction_solid[5][5], &tab_temperature[5][5]);
+	//Ctab[5][5].calculate_phase_fraction_and_masses();
+	//cout << "masa 5 5 = " << Ctab[5][5].mass[2] << endl;
+
+	//Ctab[6][6].set_initial_conditions(&tab_initial_concentration[6][6][0][0], &tab_initial_state[6][6], &tab_initial_fraction_solid[6][6], &tab_temperature[6][6]);
+	//Ctab[6][6].calculate_phase_fraction_and_masses();
+	//cout << "masa 6 6 = " << Ctab[6][6].mass[2] << endl;
+
+	//calculate_chemical_potentials_in_single_cell(pointer_Ctab[6][6]);
+	//calculate_chemical_potentials_in_single_cell(pointer_Ctab[7][7]);
+	//calculate_chemical_potentials_in_single_cell(pointer_Ctab[8][8]);
+
+// 06-04-2020 sprawdzenie wartoœci stê¿eñ i potencja³ów chemicznych w przypadku jednej komórki
+	//double xxyy = mobility_coefficient[0] * (pointer_Ctab[5][6]->element_concentration[0][0] + pointer_Ctab[5][7]->element_concentration[0][0])	* (pointer_Ctab[5][7]->element_chemical_potential[0][0] * pointer_Ctab[5][7]->chemical_potential_coefficient - pointer_Ctab[5][6]->element_chemical_potential[0][0] * pointer_Ctab[5][6]->chemical_potential_coefficient);
+
+	//cout << "ele conc = " << pointer_Ctab[7][7]->element_concentration[0][0] << endl;
+	//cout << "ele conc x+ = " << pointer_Ctab[8][7]->element_concentration[0][0] << endl;
+	//cout << "ele chem pot x+ = " << pointer_Ctab[7][7]->element_chemical_potential[0][0] << endl;
+	//cout << "ele chem pot coef x+= " << pointer_Ctab[7][7]->chemical_potential_coefficient << endl;
+	//cout << "ele chem pot = " << pointer_Ctab[8][7]->element_chemical_potential[0][0] << endl;
+	//cout << "ele chem pot coef= " << pointer_Ctab[8][7]->chemical_potential_coefficient << endl;
+	//cout << "chem pot x+ - x = " << pointer_Ctab[7][7]->element_chemical_potential[0][0] - pointer_Ctab[8][7]->element_chemical_potential[0][0] << endl;
+	//cout << xxyy << endl;
+
+// 15-04-2020 wypisanie wartoœci przep³ywaj¹cj masy przez interfejs
+	//for (int j = 0; j < no_of_cells_y; j++)
+	//{
+	//	for (int i = 0; i < no_of_cells_x; i++)
+	//	{
+	//		cout << tab_delta_mass_through_interface[j][i][0] << "\t";
+	//	}
+	//	cout << "\n";
+	//}
+
+// 21-04-2020 zakomentowany od ponad roku blok - stare obliczanie mas
+	////*********************************
+	//void new_mass_first_cell(C_cell *cell)
+	//{
+	//	cell->mass_C =	cell->mass_C +  (- tab_flux_ele_al1_right[0]) *	dt_dx_squared;
+	//	cell->mass_Si =	cell->mass_Si +  (- tab_flux_ele_al2_right[0]) * dt_dx_squared;
+	//	cell->mass_Fe =	cell->mass_Fe +  (- tab_flux_ele_base_right[0]) * dt_dx_squared;
+	//}
+	////*********************************
+	//void new_mass_mid_cells(C_cell *cell)
+	//{
+	//	for (int i = 0; i < no_of_cells - 2; i++)
+	//	{
+	//		(cell + i)->mass_C =	(cell + i)->mass_C +  (tab_flux_ele_al1_right[i] -  tab_flux_ele_al1_right[i + 1]) *  dt_dx_squared;
+	//		(cell + i)->mass_Si =	(cell + i)->mass_Si + (tab_flux_ele_al2_right[i] - tab_flux_ele_al2_right[i + 1]) * dt_dx_squared;
+	//		(cell + i)->mass_Fe =	(cell + i)->mass_Fe + (tab_flux_ele_base_right[i] - tab_flux_ele_base_right[i + 1]) * dt_dx_squared;
+	//	}
+	//}
+	////*********************************
+	//void new_mass_last_cell(C_cell *cell)
+	//{
+	//	cell->mass_C =	cell->mass_C +  (tab_flux_ele_al1_right[no_of_cells - 1 - 1]) *   dt_dx_squared;
+	//	cell->mass_Si =	cell->mass_Si +  (tab_flux_ele_al2_right[no_of_cells - 1 - 1]) * dt_dx_squared;
+	//	cell->mass_Fe =	cell->mass_Fe +  (tab_flux_ele_base_right[no_of_cells - 1 - 1]) * dt_dx_squared;
+	//}
+	////*********************************
+	//void new_mass_all_cells(C_cell *cell)
+	//{
+	//	new_mass_first_cell(cell);
+	//	new_mass_mid_cells(cell + 1);
+	//	new_mass_last_cell(cell + no_of_cells - 1);
+	//}
+	////*********************************
+	//void calculate_delta_mass_volume_parameters(int i, C_cell *cell)
+	//{
+	//	if ( (tab_temporary_volume[i] + delta_volume) > C_cell::volume)
+	//	{
+	//		delta_volume = (tab_temporary_volume[i] + delta_volume) - C_cell::volume;
+	//		delta_mass_factor = delta_volume / tab_temporary_volume[i];
+	//				
+	//		delta_mass_C_right =  delta_mass_factor		* cell->mass_C;
+	//		delta_mass_Si_right =  delta_mass_factor	* cell->mass_Si;
+	//		delta_mass_Fe_right =  delta_mass_factor	* cell->mass_Fe;
+	//	}
+	//	else if ( (tab_temporary_volume[i] + delta_volume) < C_cell::volume)
+	//	{
+	//		delta_volume = (tab_temporary_volume[i] + delta_volume) - C_cell::volume;
+	//		delta_mass_factor = delta_volume / tab_temporary_volume[i + 1];
+	//				
+	//		delta_mass_C_right =  delta_mass_factor		* (cell + 1)->mass_C;
+	//		delta_mass_Si_right =  delta_mass_factor	* (cell + 1)->mass_Si;
+	//		delta_mass_Fe_right =  delta_mass_factor	* (cell + 1)->mass_Fe;
+	//	}
+	//	else
+	//	{
+	//		delta_mass_C_right = delta_mass_Si_right = delta_mass_Fe_right = delta_volume = delta_mass_factor = 0;
+	//	}
+	//}
+	////*********************************
+	//void calculate_delta_mass_volume_parameters_for_last_cell(C_cell *cell)
+	//{
+	//	if ( (tab_temporary_volume[no_of_cells - 1] + delta_volume) > C_cell::volume)
+	//	{
+	//		delta_volume = (tab_temporary_volume[no_of_cells - 1] + delta_volume) - C_cell::volume;
+	//		delta_mass_factor = delta_volume / tab_temporary_volume[no_of_cells - 1];
+	//				
+	//		delta_mass_C_right =  delta_mass_factor		* cell->mass_C;
+	//		delta_mass_Si_right =  delta_mass_factor	* cell->mass_Si;
+	//		delta_mass_Fe_right =  delta_mass_factor	* cell->mass_Fe;
+	//	}
+	//	else if ( (tab_temporary_volume[no_of_cells - 1] + delta_volume) < C_cell::volume)
+	//	{
+	//		delta_volume = (tab_temporary_volume[no_of_cells - 1] + delta_volume) - C_cell::volume;
+	//		delta_mass_factor = delta_volume / tab_temporary_volume[no_of_cells - 1];
+	//				
+	//		delta_mass_C_right =  delta_mass_factor		* cell->mass_C;
+	//		delta_mass_Si_right =  delta_mass_factor	* cell->mass_Si;
+	//		delta_mass_Fe_right =  delta_mass_factor	* cell->mass_Fe;
+	//	}
+	//	else
+	//	{
+	//		delta_mass_C_right = delta_mass_Si_right = delta_mass_Fe_right = delta_volume = delta_mass_factor = 0;
+	//	}
+	//
+	//	delta_volume = 0;
+	//}
+	////*********************************
+	//void recalculate_new_mass(C_cell *cell)
+	//{
+	//	cell->mass_C = delta_mass_C_left	+ cell->mass_C - delta_mass_C_right;
+	//	cell->mass_Si = delta_mass_Si_left	+ cell->mass_Si - delta_mass_Si_right;
+	//	cell->mass_Fe = delta_mass_Fe_left	+ cell->mass_Fe - delta_mass_Fe_right;
+	//
+	//	delta_mass_C_left = delta_mass_C_right;
+	//	delta_mass_Si_left = delta_mass_Si_right;
+	//	delta_mass_Fe_left = delta_mass_Fe_right;
+	//}
+	////*********************************
+	//void recalculate_new_mass_for_last_cell(C_cell *cell)
+	//{
+	//	cell->mass_C = delta_mass_C_left	+ cell->mass_C - delta_mass_C_right;
+	//	cell->mass_Si = delta_mass_Si_left	+ cell->mass_Si - delta_mass_Si_right;
+	//	cell->mass_Fe = delta_mass_Fe_left	+ cell->mass_Fe - delta_mass_Fe_right;
+	//
+	//	delta_mass_C_left	= 0;
+	//	delta_mass_Si_left	= 0;
+	//	delta_mass_Fe_left	= 0;
+	//}
+	//--------------------------------------------------------------------
+
+// 04-06-2020 fragment wypisywania do pliku jeszcze nie przeniesiony do funkcji i nie zapêtlony i nie korzystaj¹cy z tablicy c min max si min max
+	//double cmin = 72.0, cmax = 244.8;
+	//double simin = 70.0, simax = 255.0;
+	//double massmin = 7.0e-27, massmax = 7.4e-27;
+
+	//conc_field_txt << "#2. pierwiastek\n";
+	//for (int i = 0; i < no_of_cells_x; i++)
+	//{
+	//	conc_field_txt << "0 0 0\t";
+	//}
+	//conc_field_txt << "\n";
+
+	//for (int j = 0; j < no_of_cells_y; j++)
+	//{
+	//	for (int i = 0; i < no_of_cells_x; i++)
+	//	{
+	//		//conc_field_txt << color_depth << " 0 0" << "\t"; // R G B
+
+	//		//cout << Ctab[j][i].element_concentration[0][0] << endl;
+	//		double qwe = round((Ctab[j][i].element_concentration[0][1] - simin) / (simax - simin) * color_depth);
+	//		//conc_field_txt << qwe /*Ctab[j][i].element_concentration[0][0]*/ << " " << "0" << " " << "0" << "\t";
+	//		conc_field_txt << color_depth - qwe << " " << color_depth << " " << color_depth - qwe << "\t";
+	//	}
+	//	conc_field_txt << "\n";
+	//}
+
+
+
+
+	//for (int j = 0; j < no_of_cells_y; j++)
+	//{
+	//	for (int i = 0; i < no_of_cells_x; i++)
+	//	{
+	//		//conc_field_txt << color_depth << " 0 0" << "\t"; // R G B
+
+	//		//cout << Ctab[j][i].element_concentration[0][0] << endl;
+	//		double qwe = round((Ctab[j][i].mass[no_of_phases] - massmin) / (massmax - massmin) * color_depth);
+	//		//conc_field_txt << qwe /*Ctab[j][i].element_concentration[0][0]*/ << " " << "0" << " " << "0" << "\t";
+	//		conc_field_txt << color_depth - qwe << " " << color_depth - qwe << " " << color_depth << "\t";
+	//	}
+	//	conc_field_txt << "\n";
+	//}
+
+	//conc_field_txt.close();
+
+// 30-06-2020 stare triggerowanie
+	//void C_cell::triggers_handling()
+	//{
+	//	for (int i = 0; i < 4; i++)
+	//	{
+	//		if (whether_to_check_edge[i] == true)
+	//		{
+	//			if (*pointer_solid_fraction_on_edge[i] > 0 && *pointer_solid_fraction_on_edge[i] < 1)
+	//			{
+	//				//trigger[i] = false;
+	//				trigger[4] = true;	// entire cell trigger
+	//				trigger[i] = true;
+	//			}
+	//			//else
+	//			//{
+	//			//}
+	//		}
+	//
+	//		if (*pointer_solid_fraction_on_edge[i] == 0 || *pointer_solid_fraction_on_edge[i] == 1)
+	//		{
+	//			whether_to_check_edge[i] = true;
+	//		}
+	//		else
+	//		{
+	//			whether_to_check_edge[i] = false;
+	//		}
+	//	}	
+	//}
+	////*********************************
+	//inline void C_cell::clear_triggers()
+	//{
+	//	for (int i = 0; i < 5; i++)
+	//	{
+	//		trigger[i] = false;
+	//	}
+	//}
+	////*********************************
+	//inline void C_cell::clear_edge_checking()
+	//{
+	//	for (int i = 0; i < 4; i++)
+	//	{
+	//		whether_to_check_edge[i] = false;
+	//	}
+	//}
+
+//// tablica u¿ywana wczeœnej, przy tworzeniu plików graficznych w tym programie, teraz tworzenie przeniesione do odrêbnego programu
+	//void fill_min_max_txt_tab()
+	//{
+	//	//tab_min_max_for_txt_file[0][0] = 72.0;		// C min
+	//	//tab_min_max_for_txt_file[0][1] = 245.0;		// C max
+	//	tab_min_max_for_txt_file[0][0] = 50.0;		// C min
+	//	tab_min_max_for_txt_file[0][1] = 90.0;		// C max
+	//	tab_min_max_for_txt_file[1][0] = 70.0;		// Si min
+	//	tab_min_max_for_txt_file[1][1] = 255.0;		// Si max
+	//	tab_min_max_for_txt_file[2][0] = 7.0e-27;	// mass min
+	//	tab_min_max_for_txt_file[2][1] = 7.4e-27;	// mass max
+	//
+	//	for (int i = 0; i < no_of_elements; i++)
+	//	{
+	//		tab_min_max_for_txt_file[i][1] = color_depth / (tab_min_max_for_txt_file[i][1] - tab_min_max_for_txt_file[i][0]);
+	//	}
+	//}
+
+//// stary export, teraz przerabianie na grafikê w 2., odrêbnym programie
+	//void export_to_file()
+	//{
+	//	conc_field_txt.open(txt_filename, ios::out);
+	//	conc_field_txt <<
+	//		"P3" << "\n" <<
+	//		no_of_cells_x << " " << no_of_cells_y * 3 + 2 << "\n" <<
+	//		color_depth << endl;
+	//
+	//	for (int k = 0; k < no_of_elements - 1; k++)
+	//	{
+	//		conc_field_txt << "# " << k << ". element" << endl;
+	//
+	//		for (int j = 0; j < no_of_cells_y; j++)
+	//		{
+	//			for (int i = 0; i < no_of_cells_x; i++)
+	//			{
+	//				temp_mass_for_txt_output = round((Ctab[j][i].element_concentration[0][k] - tab_min_max_for_txt_file[k][0]) * tab_min_max_for_txt_file[k][1]);
+	//				switch (k % 3)
+	//				{
+	//				case 1:
+	//					conc_field_txt << color_depth - temp_mass_for_txt_output << " " << color_depth << " " << color_depth - temp_mass_for_txt_output << "\t";
+	//					break;
+	//
+	//				case 2:
+	//					conc_field_txt << color_depth - temp_mass_for_txt_output << " " << color_depth - temp_mass_for_txt_output << " " << color_depth << "\t";
+	//					break;
+	//
+	//				default:
+	//					conc_field_txt << color_depth << " " << color_depth - temp_mass_for_txt_output << " " << color_depth - temp_mass_for_txt_output << "\t";
+	//				}
+	//			}
+	//			conc_field_txt << "\n";
+	//		}
+	//		
+	//		for (int i = 0; i < no_of_cells_x; i++)
+	//		{
+	//			conc_field_txt << "0 0 0\t";
+	//		}
+	//		conc_field_txt << "\n";
+	//	}
+	//
+	//	conc_field_txt << "# masa komorki\n";
+	//	for (int j = 0; j < no_of_cells_y; j++)
+	//	{
+	//		for (int i = 0; i < no_of_cells_x; i++)
+	//		{
+	//			temp_mass_for_txt_output = round((Ctab[j][i].mass[no_of_phases] - tab_min_max_for_txt_file[2][0]) * tab_min_max_for_txt_file[2][1]); // tu zamiast 2 powinno byæ no_of_elements - 1			
+	//			conc_field_txt << color_depth - temp_mass_for_txt_output << " " << color_depth - temp_mass_for_txt_output << " " << color_depth << "\t";
+	//		}
+	//		conc_field_txt << "\n";
+	//	}
+	//
+	//	conc_field_txt.close();
+	//}
+
+
+22-07-2020 w pêtli obliczeñ - pomoc przy znajdywaniu b³êdów
+			//C_cell *cell = &Ctab[5][4];
+			//chemical_potential_pointer = LIQ_calculations.calculations_with_print(&cell->temperature, &cell->element_mass[C_cell::list_of_states::LIQUID][0]);
+			//
+			//C_cell *cell = &Ctab[1][8];
+			//if (cell->cell_state == C_cell::FCC)
+			//{
+			//	chemical_potential_pointer = FCC_calculations.calculations_with_print(&cell->temperature, &cell->element_mass[C_cell::list_of_states::FCC][0]);
+			//}
+			// else if (cell->cell_state == C_cell::LIQUID)
+			//{
+			//	chemical_potential_pointer = LIQ_calculations.calculations_with_print(&cell->temperature, &cell->element_mass[C_cell::list_of_states::LIQUID][0]); 
+			//}
+			//else
+			//{
+			//	chemical_potential_pointer = FCC_calculations.calculations_with_print(&cell->temperature, &cell->element_mass[C_cell::list_of_states::FCC][0]);
+			//	chemical_potential_pointer = LIQ_calculations.calculations_with_print(&cell->temperature, &cell->element_mass[C_cell::list_of_states::LIQUID][0]); 
+			//}
+			////chemical_potential_pointer = LIQ_calculations.calculations_with_print(&cell->temperature, &cell->element_mass[C_cell::list_of_states::LIQUID][0]);
+			//cout << "state = " << cell->cell_state << endl;
+			//cout << "immu = " << cell->immunity_countdown << endl;
+
+			//cell = &Ctab[5][6];
+			//chemical_potential_pointer = FCC_calculations.calculations_with_print(&cell->temperature, &cell->element_mass[C_cell::list_of_states::FCC][0]);
+
+			//cout << "\n\n-----------------------------------------\n\n" << endl;

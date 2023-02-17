@@ -1,0 +1,19 @@
+﻿  C_cell.cpp
+C:\Users\rz_m\Desktop\Marek\!! Nextcloud\wydobywanie\C_cell.cpp(334,18): warning C4244: "inicjowanie": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\rz_m\Desktop\Marek\!! Nextcloud\wydobywanie\C_cell.cpp(335,17): warning C4244: "inicjowanie": konwersja z "double" do "int", możliwa utrata danych
+  C_rysowanie.cpp
+C:\Users\rz_m\Desktop\Marek\!! Nextcloud\wydobywanie\C_rysowanie.cpp(56,34): warning C4244: "argument": konwersja z "double" do "const unsigned char", możliwa utrata danych
+C:\Users\rz_m\Desktop\Marek\!! Nextcloud\wydobywanie\C_rysowanie.cpp(56,26): warning C4244: "argument": konwersja z "double" do "const unsigned char", możliwa utrata danych
+  C_TQ_chem_pot.cpp
+  C_TQ_chem_pot_two_ph.cpp
+  C_TQ_Fe.cpp
+  C_TQ_Fe_fcc_gra.cpp
+  C_TQ_Fe_old.cpp
+  C_TQ_liquidus.cpp
+  C_TQ_single_phase.cpp
+  C_TQ_single_phase_old.cpp
+  C_TQ_single_property.cpp
+  C_TQ_single_property_old.cpp
+  main.cpp
+  Generowanie kodu...
+  wydobywanie.vcxproj -> C:\Users\rz_m\Desktop\Marek\!! Nextcloud\wydobywanie\x64\Debug\wydobywanie.exe

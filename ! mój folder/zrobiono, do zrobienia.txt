@@ -1,0 +1,81 @@
+zrobiono - // 24-04-2019 ccell - wysy³anie tablicy initial conc: dzia³a dla wiêkszej iloœci pierwiastków
+zrobiono - // 24-04-2019 chem pot.get chem pot - wysy³anie tablicy z masami z klasy ccell
+zrobiono - // 24-04-2019 nastêpne zadanie: utworzyæ tablicê obiektów ccell, utworzyæ obiekty do uk³adów FCC, LIQ (pytanie czy dla mieszaniny te¿) zacz¹æ myœleæ nad obliczeniami potencja³ów chemicznych i zmian¹ masy w krokach czasowych
+zrobiono - // 03-10-2019 obliczenia normalnej do interfejsu, problem taki, ze tu trzeba warunki brzegowe wprowadzic ze wzgledu na sposob obliczania (sasiednie komorki wymagane)
+zrobiono - // 15-10-2019 dodanie funkcji phase fraction
+zrobiono - // 07-11-2019 dodanie funkcji w klasie C_cell do wype³nienia tablicy statycznej NEWS_interface_lenght
+zrobiono - // 15-11-2019 dodanie do inicjalizacji utworzenia tablicy obiektów klasy C_cell wraz z ich inicjalizacj¹ (warunki pocz¹tkowe)
+zrobiono - // 22-11-2019 wskaŸnik w C_cell pokazuj¹cy na element tablicy z NEWS, dl int zgodnie z alf¹ i %FCC
+zrobiono - // 26-11-2019 testowanie wczytywania z pliku: warunki periodyczne nie nadaj¹ siê do testowania interfejsu pod k¹tem - sprawdzenia poprawnoœci liczenia konta i origin corner, nale¿y przebudowaæ na warunki lustrzane
+zrobiono - // 26-11-2019 zestawienie na ekran warunkow wejscia phase fraction z pliku txt oraz k¹ty po obliczeniach
+zrobiono - // 26-11-2019 wyjœæ z tablic¹ abc z fazy testów - przekszta³ciæ do standardowo u¿ywanych tablic
+zrobiono - // 27-11-2019 poprawne ustawianie wskaŸników NEWS, ale! nale¿y to potestowaæ, najlepiej przez testowanie na du¿¹ skalê ró¿nych funkcji poprzez wczytywanie z pliku
+	   // stanu i %FCC wygenerowanych w innym miejscu i zapisanych do pliku - inicjalizacja ze Ÿród³a a nie z funkcji tu w programie
+	   // update: zrobiono inicjalizacjê ze Ÿród³a, sprawdziæ jeszcze wskaŸniki NEWS
+zrobiono - // 15-01-2020 zmieniono rozmiar tablicy Ctab do rzeczywistej iloœci obiektów obliczanych (bez warunków brzegowych, dodano tablicê wskaŸników *C_cell powiêkszon¹ o warunki brzegowe oraz zmieniono odpowiednie funkcje
+	   // aby pracowa³y na pomniejszonej Ctab albo na tablicy *C_cell, wskaŸniki NEWS wstêpnie sprawdzone
+zrobiono - // 15-01-2020 sprawdzono poprawnoœæ obliczania potencja³ów chemicznych i zapisywania ich w tablicy wewn¹trze C_cell
+zrobiono - // 15-01-2020 sprawdzic jednostki w stezeniu pierwiastkow i w ca³ym obliczaniu delta mass (plik z prac¹ dokt)
+zrobiono - // 11-02-2020 przerzucono obliczenia stezen z main do funkcji obliczajacej tez potencjaly chemiczne - potencjaly i stezenia liczone w tych samych petlach, niezaleznie od siebie
+	   // ewentualna weryfikacja popawnosci? narazie dziala dobrze
+zrobiono - // 11-02-2020 dodano wyzerowanie wartosci nieobliczanych w tym kroku dla tab_delta_mass; naprawiono obliczanie delta_mass - zerowa wartosc jesli temperatura jest ta sama
+zrobiono - // 11-02-2020 dodac wspolczynnik zmieniajacy potencjal chemiczny w zaleznosci od odchylki od masy w komorce (uwzglednienie pustki i naprezen)
+	   // dodac, przy obliczaniu delta_mass na interfejsie, uwzglednienie wartosci NEWS
+zrobiono - // 13-02-2020 dodaæ sprawdzenie jakie fazy s¹ w s¹siednich komórkach i wywo³aæ odpowiednie funkcje licz¹ce delta mass tylko dla faz obecnych
+	   // dodaæ uwzglêdnienie krawêdzi wspólnej faz w obliczeniach delta mass
+zrobiono -*// 13-02-2020 w obliczeniach miedzy komorkami, w ktorych jest interfejs, jest blad w obliczeniach jesli jest liczona faza ciekla, jest brane solid fra on edge a nie 1 - solid fra on edge
+zrobiono - // 18-02-2020 sprawdziæ funkcjê calculate_concentration(); w ccell - nie jest nigdzie wywo³ywana, stê¿enia potrzebne do obliczeñ fluxów, sprawdziæ funkcjê gdy dojdzie siê do fluxów
+	   // update: funkcja wywo³ywana przy obliczaniu fluxów, w niej równie¿ obliczanie masy komórki do wspó³czynnika potencja³u chemicznego
+zrobiono - // 18-02-2020 w C_cell tab NEWS int length sa zle wartosci dla konta 90 st (pierwsza wartosc tablicy [17]) przesuniecie o 1
+zrobiono - // 10-03-2020 dodano sprawdzenie: masy wynik obliczeñ vs. dane wejœciowe; przy b³êdnych obliczeniach w obiektach TQ zwiêkszana jest temperatura o 1e-10 deg i obliczenia wykonywane s¹ raz jeszcze, do skutku
+zrobiono - // 03-04-2020 sprawdzono zmianê masy pomiêdzy s¹siednimi komórkami dla poszczególnych faz, uwzglêdniono czêœæ wspóln¹ interfejsu przynale¿n¹ dla danej fazy
+zrobiono - // 03-04-2020 w komorce srodkowej, interfejs skosny, jest wmiana masy z komorka powyzej, choc nie powinno byæ - temperatura taka sama: po zmianach i ponownym sprawdzeniu nie stwierdzono tego b³êdu
+zrobiono - // 03-04-2020 przy pionowym interfejsie jest b³¹d, poprawiæ przypisywanie NEWS, sprawdziæ czy przypisywanie nie dla deg 90 jest dobre!
+zrobiono - // 10-04-2020 trzeba posprawzac poczatki i konce petli (obliczanie check_current_cell_and_neighbour_then_calculate_delta_mass), nie jest wra¿liwe na zmianê warunków brzegowych ale cell_border_thickness musi byæ > 0
+zrobiono - // 15-04-2020 dodaæ wymianê masy pomiêdzy fazami wewn¹trz komórki interfejsu
+zrobiono - // 15-04-2020 przep³yw masy przez interfejs, kontynuowaæ sprawdzanie czy obliczenia s¹ poprawne (czy uwzglêdniaj¹ d³ugoœæ interfejsu) dla wiêkszej siatki i innych k¹tów
+zrobiono - // 15-04-2020 wszystkie fluxy: zmiana masy pomiêdzy s¹siadami oraz wewn¹trz jednej komórki
+zrobiono - // 20-04-2020 sprawdziæ pêtle while - tu jest problem w tej chwili, masa odniesienia musi byæ zmieniona, rozwi¹zanie: obliczanie mas faz i ca³ej komórki w ka¿dym kroku czasowym
+zrobiono - // 02-06-2020 sparametryzowaæ kroki czasowe - pêtla wewnêtrzna i zewnêtrzna
+zrobiono - // 02-06-2020 g³êbia kolorów do sparametryzowania - teraz w kilku miejscach jest wpisane rêcznie 256
+zrobiono - // 04-06-2020 mo¿e dodaæ kolory w funkcji wypisywania do pliku, pomys³: switch (teraz pierwsze 2 elementy, tj. C i Si s¹ czerowne)
+zrobiono - //_______________________________________________________________________
+           // 21-05-2020 wrzuciæ wypisywanie do pliku do funkcji
+           // 21-05-2020 minimum i maksimum stê¿eñ a co za tym idzie wartoœci w pliku - teraz wpisywane rêcznie: do dupy, trzeba znajdowaæ minimum i maksimum
+	   // 04-06-2020 update: teraz to znajduje siê w funkcji, wpisywanie do tablicy i jeszcze przeliczanie wspó³czynnika z C max, ciut lepiej ale nie ma znajdywania wartoœci min max automatycznie
+	   // 15-06-2020 update: zmieniono wypisywanie do pliku w projekcie "wydobywanie", dodano program do przegl¹dania plików wyjœcia w poszukiwaniu max i min oraz wypisywania stamt¹d plików graficznych
+	   //-----------------------------------------------------------------------
+zrobiono - // sprawdzono poprawnoœæ dzia³ania programu dla 4+1 pierwiastków w fazie FCC, sprawdzono poprawnoœæ dla 2+1 w LIQ, sprawdzono poprawnoœæ dla 4+1 w LIQ; przep³ywy w LIQ s¹ du¿o szybsze przy tych samych mobilnoœciach (chyba dobrze)
+zrobiono - // 15-04-2020 dopisaæ funkcjê na zmianê masy w kolejnym kroku czasowym
+	   // 21-05-2020 update: chyba teraz chodzi tylko o czêœæ zwi¹zan¹ ze zmianami na granicy miêdzyfazowej, bo czêœæ jednofazowa dzia³a dobrze
+	   // 24-06-2020 update: czêœæ dwufazowa te¿ wydaje siê dzia³aæ dobrze
+zrobiono - // 24-06-2020 dodano wykrywanie b³êdów - wyœwietlany status faz i masy pierwiastków, patrz C_TQ_chem_pot.cpp - funkcja: get chemical potentials
+zrobiono - // 22-07-2019 uzupe³niæ C_cell o pozosta³e zmienne (wyszczególnione w zeszycie)
+	   // 18-11-2019 update: pozosta³ do zrobienia marker immune
+zrobiono - // 22-11-2019 potencja³y, fluxy, nowa masa, triggery
+	   // 05-12-2019 update: flux, nowa masa, triggery
+	   // 15-04-2020 update: nowa masa, triggery
+	   // 24-06-2020 update: triggery
+zrobiono - // 24-06-2020 dodaæ epsilon fazy pozosta³ej, co najmniej na poziomie 1%, mo¿e wiêcej - teraz 1%
+zrobiono - // 26-06-2020 dopisaæ initial trigger - pojawienie siê interfejsu z powidu nierealnego wejœcia z pliku (dojœcie do takiej sytuacji spowodowa³oby wczeœniejszy trigger)
+	   // ten interfejs mo¿e póŸniej zanikn¹æ, mo¿liwe, ¿e trzeba bêdzie ponawiaæ co ileœ kroków próbê wejœcia interfejsu na sta³e do danej komórki
+	   // 01-07-2020 zmieniono podejœcie do triggerów, triggery s¹ tam gdzie jest front na krawêdzi (triggerig) i nie ma po 2. stronie (triggered)
+zrobiono - // 01-07-2020 dodano interwa³ pomiêdzy kolejnymi oblizceniami potencja³ów chemicznych - brak obliczeñ co krok
+	   // 01-07-2020 dodano spisywanie czasu obliczeñ, dodano wypisywanie pliku summary,
+zrobiono - // 07-07-2020 dodano a nastêpnie poprawiono funkcje wyznaczajaca odleglosc od interfejsu
+zrobiono - // 13-07-2020 sprawdzic czy dla przejscia interfejsu nastepuje natychmiastowe wykonanie obliczen i zmiana w odleglosci od interfejsu
+zrobiono - // 15-07-2020 dopisaæ triggerowanie interfejsu na styku liq-fcc
+zrobiono - // 15-07-2020 prace nad wznowieniem, rozpoczêto i zakoñczono, wznowienie obliczeñ od dowolnego pliku dzia³a
+zrobiono - // 16-06-2020 w tym momencie rêczne wpisywanie 0 lub 1 jako Ÿród³o danych do wypisywania do pliku czy FCC czy LIQ (chodzi o masy / stê¿enia)
+	   // zrobiæ wypisywanie dla ka¿dego stanu osobno?
+	   // 24-06-2020 update: dopiero po przechodzeniu frontu do i z komórek
+	   // 17-07-2020 przy pisaniu opcji kontynuacji obliczeñ z dowolnego pliku dodano wypisywanie osobno stê¿eñ z FCC oraz LIQ (na froncie), pozycja frontu determinowana w outpucie fraction
+zrobiono - // 13-07-2020 trigger_interface_movement tu jest sprawdzanie immuna w komórce triggeruj¹cej a nie ma w komórce triggerowanej - bezsensu
+	   // 17-07-2020 update: dodano sprawdzenie komórki triggerowanej, po stwierdzeniu, ¿e w jednym kroku czasowym mo¿e nast¹piæ kaskadowe triggerowanie pozostawiono sprawdzanie równie¿ komórki triggeruj¹cej
+zrobiono - // 30-06-2020 wypisa³o mi 0.009997871377 phase fra... a niepowinno
+	   // 01-07-2020 update: teraz jest to mo¿liwe z powodu markera immune, natomiast ten b³¹d nie powinien siê pojawiæ - nale¿y (mo¿na) sprawdziæ
+	   // 17-07-2020 update: teraz nie obserwuje siê niewyjaœnionych braków triggerowania, kontynuowaæ obserwacje, jeœli problem siê nie bêdzie pojawia³ uznaæ za wyjaœniony	
+	   // 20-07-2020 update: by³ brak uaktualnienia phase fraction 
+zrobiono - // 21-07-2020 sprawdziæ "Ÿle wypisan¹ klatkê" w pliku graficznym, czy to b³¹d podczas programu g³ównego czy txt to ppm
+	   // 20-07-2020 update: b³¹d powinien byæ powi¹zany z poprzednim wpisem, podprogram txt_to_ppm bra³ b³êdne wartoœci phase_fraction (<0.01 ale > 0) i przez to iterpretowa³ jako interfejs komórkê, która int nie powinna byæ
+zrobiono - // 17-07-2020 sprawdziæ odleg³oœæ od interfejsu, w przypadku gdy 2 komórki interfejsu obok siebie, by³a sytuacja, ¿e jedna z nich mia³a odleg³oœæ od interfejsu 1 zamiast 0
